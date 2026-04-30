@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Student Dashboard</h3>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-3"><div class="stat">Total Fees<br><b>₹{{ s.fees_total }}</b></div></div>
+    <div class="col-md-3"><div class="stat">Paid Fees<br><b>₹{{ s.fees_paid }}</b></div></div>
+    <div class="col-md-3"><div class="stat">Remaining<br><b>₹{{ s.fees_total - s.fees_paid }}</b></div></div>
+    <div class="col-md-3"><div class="stat">Subjects<br><b>{{ subs|length }}</b></div></div>
+</div>
+
+<div class="card p-3 mb-4">
+    <h5>Student Information</h5>
+    <p><b>Name:</b> {{ s.name }}</p>
+    <p><b>Email:</b> {{ s.email }}</p>
+    <p><b>Roll No:</b> {{ s.roll_no }}</p>
+    <p><b>Branch:</b> {{ s.branch }}</p>
+    <p><b>Year:</b> {{ s.year }}</p>
+    <p><b>Semester:</b> {{ s.semester }}</p>
+    <p><b>Phone:</b> {{ s.phone }}</p>
+    <p><b>Address:</b> {{ s.address }}</p>
+</div>
+
+<div class="card p-3 mb-4">
+    <h5>Subjects</h5>
+    <table class="table table-bordered">
+        <tr><th>Subject</th><th>Teacher</th></tr>
+        {% for x in subs %}
+        <tr><td>{{ x.subject }}</td><td>{{ x.teacher_name }}</td></tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="card p-3 mb-4">
+    <h5>Marks</h5>
+    <table class="table table-bordered">
+        <tr><th>Subject</th><th>Test</th><th>Marks</th><th>Total</th></tr>
+        {% for m in marks %}
+        <tr><td>{{ m.subject }}</td><td>{{ m.test_name }}</td><td>{{ m.marks_obtained }}</td><td>{{ m.total_marks }}</td></tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="card p-3 mb-4">
+    <h5>Attendance</h5>
+    <table class="table table-bordered">
+        <tr><th>Subject</th><th>Total</th><th>Present</th><th>%</th></tr>
+        {% for a in att %}
+        <tr>
+            <td>{{ a.subject }}</td>
+            <td>{{ a.total_lectures }}</td>
+            <td>{{ a.present_lectures }}</td>
+            <td>{{ "%.2f"|format((a.present_lectures / a.total_lectures) * 100) if a.total_lectures else 0 }}%</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="card p-3 mb-4">
+    <h5>Timetable</h5>
+    <table class="table table-bordered">
+        <tr><th>Day</th><th>Time</th><th>Subject</th><th>Teacher</th><th>Room</th></tr>
+        {% for t in tt %}
+        <tr><td>{{ t.day }}</td><td>{{ t.time }}</td><td>{{ t.subject }}</td><td>{{ t.teacher }}</td><td>{{ t.room }}</td></tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="card p-3 mb-4">
+    <h5>Notices</h5>
+    {% for n in notices %}
+    <div class="notice">
+        <b>{{ n.title }}</b>
+        <p>{{ n.message }}</p>
+        <small>{{ n.posted_by }} | {{ n.created_at }}</small>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

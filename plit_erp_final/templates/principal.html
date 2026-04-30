@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h3>Principal Dashboard</h3>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-6"><div class="stat">Total Students<br><b>{{ stats.students }}</b></div></div>
+    <div class="col-md-6"><div class="stat">Total Teachers<br><b>{{ stats.teachers }}</b></div></div>
+</div>
+
+<div class="card p-3 mb-4">
+    <h5>Add Student</h5>
+    <form action="/add_student" method="POST" class="row g-3">
+        <div class="col-md-4"><input name="name" class="form-control" placeholder="Student Name" required></div>
+        <div class="col-md-4"><input name="email" type="email" class="form-control" placeholder="Email" required></div>
+        <div class="col-md-4"><input name="password" class="form-control" placeholder="Password" required></div>
+        <div class="col-md-3"><input name="roll_no" class="form-control" placeholder="Roll No" required></div>
+        <div class="col-md-3"><select name="branch" class="form-control">{% for b in branches %}<option>{{ b }}</option>{% endfor %}</select></div>
+        <div class="col-md-3"><select name="year" class="form-control">{% for y in years %}<option>{{ y }}</option>{% endfor %}</select></div>
+        <div class="col-md-3"><select name="semester" class="form-control">{% for sem in semesters %}<option>{{ sem }}</option>{% endfor %}</select></div>
+        <div class="col-md-4"><input name="phone" class="form-control" placeholder="Phone" required></div>
+        <div class="col-md-4"><input name="fees_total" type="number" class="form-control" placeholder="Total Fees" required></div>
+        <div class="col-md-4"><input name="fees_paid" type="number" class="form-control" placeholder="Paid Fees" required></div>
+        <div class="col-md-12"><input name="address" class="form-control" placeholder="Address" required></div>
+        <div class="col-md-12"><button class="btn btn-success">Add Student</button></div>
+    </form>
+</div>
+
+<div class="card p-3 mb-4">
+    <h5>Add Teacher</h5>
+    <form action="/add_teacher" method="POST" class="row g-3">
+        <div class="col-md-4"><input name="name" class="form-control" placeholder="Teacher Name" required></div>
+        <div class="col-md-4"><input name="email" type="email" class="form-control" placeholder="Email" required></div>
+        <div class="col-md-4"><input name="password" class="form-control" placeholder="Password" required></div>
+        <div class="col-md-4"><select name="branch" class="form-control">{% for b in branches %}<option>{{ b }}</option>{% endfor %}</select></div>
+        <div class="col-md-4"><select name="subject" class="form-control">{% for sub in subjects_list %}<option>{{ sub }}</option>{% endfor %}</select></div>
+        <div class="col-md-4"><input name="phone" class="form-control" placeholder="Phone" required></div>
+        <div class="col-md-6"><input name="qualification" class="form-control" placeholder="Qualification" required></div>
+        <div class="col-md-6"><input name="lectures_taken" type="number" class="form-control" placeholder="Lectures Taken" required></div>
+        <div class="col-md-12"><button class="btn btn-primary">Add Teacher</button></div>
+    </form>
+</div>
+
+<div class="card p-3 mb-4">
+    <h5>Post Notice</h5>
+    <form action="/add_notice" method="POST">
+        <input name="title" class="form-control mb-2" placeholder="Notice Title">
+        <textarea name="message" class="form-control mb-2" placeholder="Notice Message"></textarea>
+        <button class="btn btn-warning">Post Notice</button>
+    </form>
+</div>
+
+<div class="card p-3 mb-4">
+    <h5>Students Details</h5>
+    <table class="table table-bordered table-striped">
+        <tr><th>Name</th><th>Email</th><th>Roll</th><th>Branch</th><th>Year</th><th>Sem</th><th>Phone</th><th>Remaining</th><th>Edit</th></tr>
+        {% for s in students %}
+        <tr>
+            <td>{{ s.name }}</td><td>{{ s.email }}</td><td>{{ s.roll_no }}</td><td>{{ s.branch }}</td>
+            <td>{{ s.year }}</td><td>{{ s.semester }}</td><td>{{ s.phone }}</td>
+            <td>₹{{ s.fees_total - s.fees_paid }}</td>
+            <td><a href="/edit_student/{{ s.id }}" class="btn btn-warning btn-sm">Edit</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="card p-3 mb-4">
+    <h5>Teachers Details</h5>
+    <table class="table table-bordered table-striped">
+        <tr><th>Name</th><th>Email</th><th>Branch</th><th>Subject</th><th>Phone</th><th>Qualification</th><th>Lectures</th></tr>
+        {% for t in teachers %}
+        <tr>
+            <td>{{ t.name }}</td><td>{{ t.email }}</td><td>{{ t.branch }}</td><td>{{ t.subject }}</td>
+            <td>{{ t.phone }}</td><td>{{ t.qualification }}</td><td>{{ t.lectures_taken }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<div class="card p-3 mb-4">
+    <h5>Notices</h5>
+    {% for n in notices %}
+    <div class="notice">
+        <b>{{ n.title }}</b>
+        <p>{{ n.message }}</p>
+        <small>{{ n.posted_by }} | {{ n.created_at }}</small>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

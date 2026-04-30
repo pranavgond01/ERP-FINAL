@@ -1,0 +1,77 @@
+body {
+    background: #eef3fb;
+    font-family: Arial, sans-serif;
+}
+
+.topnav {
+    background: linear-gradient(90deg, #002b5b, #005f99);
+}
+
+.hero {
+    background: linear-gradient(135deg, #002b5b, #0d6efd);
+    color: white;
+    padding: 25px 0;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.college-logo {
+    width: 100%;
+    max-width: 900px;
+    background: white;
+    border-radius: 12px;
+    padding: 8px;
+    margin-bottom: 15px;
+}
+
+.card {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+.glass-card {
+    background: rgba(255,255,255,0.95);
+}
+
+.stat {
+    background: linear-gradient(135deg, #ffffff, #dbeafe);
+    padding: 22px;
+    border-radius: 16px;
+    border-left: 6px solid #0d6efd;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    font-size: 18px;
+}
+
+.stat b {
+    font-size: 28px;
+    color: #002b5b;
+}
+
+.table {
+    white-space: nowrap;
+}
+
+.table th {
+    background: #002b5b;
+    color: white;
+}
+
+.notice {
+    border-left: 5px solid #0d6efd;
+    background: #f8fbff;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+}
+
+input, select, textarea, .btn {
+    border-radius: 10px !important;
+}
+
+footer {
+    background: #111827;
+    color: white;
+    text-align: center;
+    padding: 18px;
+    margin-top: 40px;
+}
